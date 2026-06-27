@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Notfound-title{
+  margin-top: 150px;
+  text-align: center;
+  font-size: 60px;
+  color: rgb(180, 180, 180);
+}
+
+.Notfound-message{
+  margin-top: 5px;
+  text-align: center;
+  font-size: 24px;
+  color: rgb(180, 180, 180);
+}
