@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import '.././Checkout/CheckoutHeader'
 import { CheckoutHeader } from './CheckoutHeader'
 import { PaymentSummary } from './PaymentSummary'
+import { formatMoney } from '../../utils/money'
 import './CheckoutPage.css'
 import { DeliveryOptions } from './DeliveryOptions'
 
@@ -15,16 +16,21 @@ export function CheckoutPage({ cart }) {
     const [paymentSummary, setPaymentSummary] = useState(null)
 
     useEffect(() => {
+        const fetchCheckoutData = async () => {
+            let response = await axios.get('/api/delivery-options?expand=estimatedDelivaryTime')
+            setDeliveryOptions(response.data)
 
-        axios.get('/api/delivery-options?expand=estimatedDelivaryTime')
-            .then((response) => {
-                setDeliveryOptions(response.data)
-            })
+            response = await axios.get('/api/payment-summary')
 
-        axios.get('/api/payment-summary')
-            .then((response) => {
-                setPaymentSummary(response.data)
-            })
+            setPaymentSummary(response.data)
+
+        }
+
+        fetchCheckoutData()
+
+
+
+
 
     }, []);
 
@@ -80,7 +86,7 @@ export function CheckoutPage({ cart }) {
                                             </div>
                                         </div>
 
-                                        <DeliveryOptions cartItem={cartItem} deliveryOptions={deliveryOptions} /> 
+                                        <DeliveryOptions cartItem={cartItem} deliveryOptions={deliveryOptions} />
                                     </div>
                                 </div>
                             )
@@ -88,7 +94,7 @@ export function CheckoutPage({ cart }) {
 
                     </div>
 
-                 <PaymentSummary paymentSummary={paymentSummary} />
+                    <PaymentSummary paymentSummary={paymentSummary} />
 
                 </div>
             </div>
