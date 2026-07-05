@@ -29,7 +29,7 @@ import './CheckoutPage.css'
 
                             <div className="cart-item-details-grid">
                                 <img className="product-image"
-                                    src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+                                    src="/images/products/athletic-cotton-socks-6-pairs.jpg" />
 
                                 <div className="cart-item-details">
                                     <div className="product-name">
@@ -105,7 +105,7 @@ import './CheckoutPage.css'
 
                             <div className="cart-item-details-grid">
                                 <img className="product-image"
-                                    src="images/products/intermediate-composite-basketball.jpg" />
+                                    src="/images/products/intermediate-composite-basketball.jpg" />
 
                                 <div className="cart-item-details">
                                     <div className="product-name">

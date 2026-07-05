@@ -1,14 +1,29 @@
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
-import { products } from '../../starting-code/data/products'
+
 import './HomePage.css'
 
 export function HomePage() {
+ 
+  const [products, setProducts ] = useState([])
+  const [cart, setCart] = useState([])
 
-  fetch('http://http://localhost:3000/api/products')
-  .then((response) => {
-    console.log(response.data)
-  })
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/products')
+      .then((response) => {
+      setProducts(response.data)
+      })
+
+      axios.get('http://localhost:3000/api/cart-items')
+      .then((response)=> {
+        setCart(response.data)
+      })
+
+
+  }, [])
+
+
 
 
   return (
@@ -16,7 +31,7 @@ export function HomePage() {
       <title>Ecommerce Project</title>
       <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
 
-      <Header />
+      <Header cart={cart}/>
       <div className="home-page">
         <div className="products-grid">
           {products.map((product) => {
@@ -33,14 +48,14 @@ export function HomePage() {
 
                 <div className="product-rating-container">
                   <img className="product-rating-stars"
-                    src={`images/ratings/rating-${product.rating.stars * 10}.png`} />
+                    src={`/images/ratings/rating-${Math.round((product.rating?.stars ?? 0) * 10)}.png`} />
                   <div className="product-rating-count link-primary">
-                   {product.rating.count}
+                    {product.rating.count}
                   </div>
                 </div>
 
                 <div className="product-price">
-                  ${(product.priceCents /100).toFixed(2)}
+                  ${(product.priceCents / 100).toFixed(2)}
                 </div>
 
                 <div className="product-quantity-container">
@@ -61,7 +76,7 @@ export function HomePage() {
                 <div className="product-spacer"></div>
 
                 <div className="added-to-cart">
-                  <img src="images/icons/checkmark.png" />
+                  <img src="/images/icons/checkmark.png" />
                   Added
                 </div>
 
@@ -72,7 +87,7 @@ export function HomePage() {
             )
 
           })}
-        
+
         </div>
       </div>
     </>
