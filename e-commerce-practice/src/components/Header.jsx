@@ -2,6 +2,7 @@ import { NavLink } from 'react-router'
 import './MainHeader.css'
 
 export function Header({cart}){
+
  let totalQuantity = 0;
 
  cart.forEach((cartItem) => {
