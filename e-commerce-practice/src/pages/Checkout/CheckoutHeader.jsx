@@ -4,8 +4,12 @@ import './CheckoutHeader.css'
 
 
 
-export function CheckoutHeader(){
+export function CheckoutHeader({cart}){
+ let totalQuantity = 0;
 
+  cart.forEach((cartItem) => {
+    totalQuantity += cartItem.quantity;
+  });
 
  return(
 
@@ -20,7 +24,7 @@ export function CheckoutHeader(){
 
                     <div className="checkout-header-middle-section">
                         Checkout (<Link className="return-to-home-link"
-                            to="/">3 items</Link>)
+                            to="/">{totalQuantity}</Link>)
                     </div>
 
                     <div className="checkout-header-right-section">
